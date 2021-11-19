@@ -2,29 +2,10 @@ import { Container, createStyles, Grid, makeStyles, Theme } from '@material-ui/c
 import { useContext } from 'react';
 import LanguageContext from '../../context/LanguageContext';
 import { ILanguageContext } from '../../interfaces/ILanguageContext';
+import useStyles from './HeaderStyles.material';
 import Logo from './Logo';
 import Nav from './nav/Nav';
 import Search from './search/Search';
-
-const useStyles = makeStyles((theme: Theme) => 
-    createStyles({
-        root: {
-            width: "100%",
-            boxShadow: "0 4px 4px 0 rgba(219, 219, 219, .25)",
-        },
-        container: {
-            height: "70px"
-        },
-        gridContent: {
-            height: "100%"
-        },
-        buttonWidth: {
-            minWidth: "auto",
-            paddingLeft: theme.spacing(1),
-            paddingRight: theme.spacing(1),
-        }
-    })
-);
 
 const Header = () => {
     const context: ILanguageContext = useContext(LanguageContext);
