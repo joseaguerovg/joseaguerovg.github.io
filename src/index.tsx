@@ -1,12 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
+import './index.css'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FF452B"
+    },
+    text: {
+      primary: "#424242"
+    }
+  },
+  typography: {
+    fontFamily: [
+      'Nunito',
+      '"Helvetica Neue"',
+      'Arial',
+      '"Segoe UI"',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    body2: {
+      fontWeight: 600,
+    },
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
