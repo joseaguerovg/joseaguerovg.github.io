@@ -1,6 +1,9 @@
-import { Button, Container, createStyles, Grid, Link, makeStyles, Menu, MenuItem, Theme } from '@material-ui/core';
-import { useState } from 'react';
+import { Container, createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { useContext } from 'react';
+import LanguageContext from '../../context/LanguageContext';
+import { ILanguageContext } from '../../interfaces/ILanguageContext';
 import Logo from './Logo';
+import Nav from './nav/Nav';
 import Search from './search/Search';
 
 const useStyles = makeStyles((theme: Theme) => 
@@ -24,15 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Header = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const classes = useStyles();
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    const context: ILanguageContext = useContext(LanguageContext);
+    const classes = useStyles(context.language);
     return (
         <div className={classes.root}>
             <Container className={classes.container}>
@@ -49,38 +45,7 @@ const Header = () => {
                         <Search></Search>
                     </Grid>
                     <Grid item md={2} sm={4} xs={5} container justifyContent="space-between" alignItems="center">
-                        <Link color="textPrimary" variant="body2">Movies</Link>
-                        <Link color="textPrimary" variant="body2">TV Shows</Link>
-                        <Button 
-                            variant="outlined" 
-                            size="small" 
-                            color="primary" 
-                            className={classes.buttonWidth}
-                            aria-controls="menu-language"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                        >
-                            EN
-                        </Button>
-                        <Menu
-                            id="menu-language"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>EN</MenuItem>
-                            <MenuItem onClick={handleClose}>ES</MenuItem>
-                        </Menu>
-                        
+                        <Nav/>
                     </Grid>
                 </Grid>
             </Container>
