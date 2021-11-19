@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             width: "90%",
             maxWidth: "480px",
-            padding: '2px 6px',
+            padding: '2px 10px',
             display: 'flex',
             alignItems: 'center',
             borderRadius: "50px"
