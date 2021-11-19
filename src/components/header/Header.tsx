@@ -1,6 +1,5 @@
 import { Button, Container, createStyles, Grid, Link, makeStyles, Menu, MenuItem, Theme } from '@material-ui/core';
 import { useState } from 'react';
-import logo from '../../assets/images/logo.svg'
 import Logo from './Logo';
 import Search from './search/Search';
 
