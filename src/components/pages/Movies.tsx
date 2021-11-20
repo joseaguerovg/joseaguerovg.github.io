@@ -5,9 +5,11 @@ import { itemsDummy } from '../../utils/itemsDummy'
 import GenresButton from "../genresButton/GenresButton";
 import { Pagination } from "@material-ui/lab";
 import Header from "../header/Header";
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { theMovieDbApi } from "../../api/theMovieDb";
 import { API_KEY } from "../../api/config";
+import { ILanguageContext } from "../../interfaces/ILanguageContext";
+import LanguageContext from "../../context/LanguageContext";
 
 interface IGenre {
     id: number,
@@ -19,17 +21,18 @@ interface IGenresResponse {
 }
 
 const Movies = () => {
+    const context: ILanguageContext = useContext(LanguageContext);
 
     const [genresList, setGenresList] = useState<IGenre[]>([]);
 
-    const getGenres = async () => {
-        const request = await theMovieDbApi.get<IGenresResponse>(`genre/movie/list?api_key=${API_KEY}&language=en-US`)
+    const getGenres = useCallback(async () => {
+        const request = await theMovieDbApi.get<IGenresResponse>(`genre/movie/list?api_key=${API_KEY}&language=${context.language}`)
         setGenresList(request.data.genres)
-    }
+    }, [context])
 
     useEffect(() => {     
         getGenres()
-    }, [])
+    }, [getGenres])
 
     return (
         <>

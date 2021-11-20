@@ -11,7 +11,7 @@ import MoviesDetails from './components/pages/MoviesDetails';
 
 function App() {
 
-  const [language, setLanguage] = useState('en')
+  const [language, setLanguage] = useState('en-US')
 
   return (
     <LanguageContext.Provider value={{language, setLanguage}}>

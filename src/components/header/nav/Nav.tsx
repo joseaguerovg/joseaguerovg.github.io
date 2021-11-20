@@ -64,8 +64,8 @@ const Nav = () => {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem onClick={() => handleChangeLanguage('en')}>EN</MenuItem>
-                <MenuItem onClick={() => handleChangeLanguage('es')}>ES</MenuItem>
+                <MenuItem onClick={() => handleChangeLanguage('en-US')}>EN</MenuItem>
+                <MenuItem onClick={() => handleChangeLanguage('es-ES')}>ES</MenuItem>
             </Menu>
         </>
     )

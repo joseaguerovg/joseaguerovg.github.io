@@ -9,7 +9,7 @@ import Search from './search/Search';
 
 const Header = () => {
     const context: ILanguageContext = useContext(LanguageContext);
-    const classes = useStyles(context.language);
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Container className={classes.container}>
