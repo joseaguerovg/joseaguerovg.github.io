@@ -5,10 +5,9 @@ import {
   Route
 
  } from "react-router-dom";
-import Home from './components/pages/Home';
 import Movies from './components/pages/Movies';
-import Header from './components/header/Header';
 import LanguageContext from './context/LanguageContext';
+import MoviesDetails from './components/pages/MoviesDetails';
 
 function App() {
 
@@ -17,10 +16,10 @@ function App() {
   return (
     <LanguageContext.Provider value={{language, setLanguage}}>
       <Router>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Movies />} />
           <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:id" element={<MoviesDetails />} />
         </Routes>
       </Router>
     </LanguageContext.Provider>

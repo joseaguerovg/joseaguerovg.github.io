@@ -1,20 +1,20 @@
-import { InputBase, IconButton, Paper } from '@material-ui/core'
+import { InputBase, IconButton, Paper, Box } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from "./SearchStyles.material";
 
 const Search = () => {
     const classes = useStyles();
     return (
-        <Paper component="form" variant="outlined" className={classes.root}>
+        <Box className={classes.root}>
             <InputBase
-                placeholder="Search movies and tv shows..."
+                placeholder="Search movies..."
                 inputProps={{ 'aria-label': 'search' }}
-                className={classes.root}
+                className={classes.input}
             />
             <IconButton type="submit" className={classes.iconButton} aria-label="search">
                 <SearchIcon />
             </IconButton>
-        </Paper>
+        </Box>
         
     )
 }

@@ -16,19 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-interface ITextHeaderLanguage {
-    movies: string,
-    tvShows: string
-}
-
 const Nav = () => {
     const context: ILanguageContext = useContext(LanguageContext);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [textMovie, setTextMovie] = useState<ITextHeaderLanguage>({
-        movies: '',
-        tvShows: ''
-    });
     const open = Boolean(anchorEl);
 
     const classes = useStyles();
@@ -45,19 +36,8 @@ const Nav = () => {
         handleClose()
     };
 
-    useEffect(() => {
-        // const languageSelected = languageFormat(context.language)
-        const languageSelected: string = languageFormat(context.language)
-        setTextMovie(HeaderLanguage[languageSelected])
-    }, [context])
     return ( 
         <>
-            <Link to="/movies">
-                <Typography color="textPrimary" variant="body2">{textMovie.movies}</Typography>
-            </Link>
-            <Link to="/tvshows">
-                <Typography color="textPrimary" variant="body2">{textMovie.tvShows}</Typography>
-            </Link>
             <Button 
                 variant="outlined" 
                 size="small" 

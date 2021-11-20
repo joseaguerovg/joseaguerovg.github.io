@@ -25,7 +25,7 @@ const Header = () => {
                     <Grid item xs container justifyContent="center">
                         <Search></Search>
                     </Grid>
-                    <Grid item md={2} sm={4} xs={5} container justifyContent="space-between" alignItems="center">
+                    <Grid item>
                         <Nav/>
                     </Grid>
                 </Grid>
