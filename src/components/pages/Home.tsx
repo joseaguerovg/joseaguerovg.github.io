@@ -1,41 +1,15 @@
 import ContentItems from '../content/contentItems/ContentItems'
-import itemImage from '../../assets/images/default-item.png'
 import ContentTitle from '../content/contentTitle/ContentTitle'
 import { Container } from '@material-ui/core'
-
-const itemsDummy = [{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  },{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  },{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  },{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  },{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  },{
-    image: itemImage,
-    name: 'Shang-Chi and the Legend of the Ten Rings',
-    voteAverage: 7.8
-  }]
+import { itemsDummy } from '../../utils/itemsDummy'
 
 const Home = () => {
     return (
         <Container>
           <ContentTitle title="Trending Movies" textLink="See all movies" pathLink="/movies" />
-          <ContentItems items={itemsDummy} />
+          <ContentItems items={itemsDummy} itemCol={2} />
           <ContentTitle title="Trending TV Shows" textLink="Trending TV Shows" pathLink="/tvshows" />
-          <ContentItems items={itemsDummy} />
+          <ContentItems items={itemsDummy} itemCol={2}/>
         </Container>
     )
 }

@@ -1,12 +1,11 @@
-import { Box, Container, Grid, Link, Typography } from '@material-ui/core'
-import ContentTitle from '../contentTitle/ContentTitle';
+import { Box, Grid, Link, Typography } from '@material-ui/core'
 import LinkWithIcon from '../linkWithIcon/LinkWithIcon';
 import useStyles from './ContentItemsStyles.material';
 import { IContentItemsProps } from './interfaces/IContentItemsProps';
 
 const ContentItems = (props: IContentItemsProps) => {
 
-    const { items } = props
+    const { items, itemCol } = props
 
     const classes = useStyles()
 
@@ -14,7 +13,7 @@ const ContentItems = (props: IContentItemsProps) => {
         <Grid container spacing={2}>
             {
                 items.map(item => (
-                    <Grid item xs={2}>
+                    <Grid item xs={itemCol}>
                         <Link variant="body1" color="textPrimary">
                             <Box style={{position: "relative"}}>
                                 <img src={item.image} alt="Img" width="100%"/>

@@ -18,7 +18,10 @@ const ContentTitle = (props: IContentTitleProps) => {
                 <Typography variant="h6" color="textPrimary">{title}</Typography>
             </Grid>
             <Grid item>
-                <LinkWithIcon pathLink={pathLink} textLink={textLink} />
+                {
+                    textLink !== '' 
+                        && (<LinkWithIcon pathLink={pathLink} textLink={textLink} />)
+                }
             </Grid>
         </Grid>
     )
