@@ -1,9 +1,10 @@
-import { Button, Link, makeStyles, Menu, MenuItem, createStyles, Theme } from '@material-ui/core'
+import { Button, makeStyles, Menu, MenuItem, createStyles, Theme, Typography } from '@material-ui/core'
 import { MouseEvent, useState, useContext, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import { ILanguageContext } from '../../../interfaces/ILanguageContext';
 import languageFormat from './utils/languageFormat';
 import { HeaderLanguage } from "../../../utils/language/header";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
@@ -51,8 +52,12 @@ const Nav = () => {
     }, [context])
     return ( 
         <>
-            <Link color="textPrimary" variant="body2">{textMovie.movies}</Link>
-            <Link color="textPrimary" variant="body2">{textMovie.tvShows}</Link>
+            <Link to="/movies">
+                <Typography color="textPrimary" variant="body2">{textMovie.movies}</Typography>
+            </Link>
+            <Link to="/tvshows">
+                <Typography color="textPrimary" variant="body2">{textMovie.tvShows}</Typography>
+            </Link>
             <Button 
                 variant="outlined" 
                 size="small" 

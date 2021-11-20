@@ -1,6 +1,7 @@
-import Header from '../../header/Header'
-import ContentItems from '../contentItems/ContentItems'
-import itemImage from '../../../assets/images/default-item.png'
+import ContentItems from '../content/contentItems/ContentItems'
+import itemImage from '../../assets/images/default-item.png'
+import ContentTitle from '../content/contentTitle/ContentTitle'
+import { Container } from '@material-ui/core'
 
 const itemsDummy = [{
     image: itemImage,
@@ -30,11 +31,12 @@ const itemsDummy = [{
 
 const Home = () => {
     return (
-        <>
-            <Header />
-            <ContentItems items={itemsDummy} title="Trending Movies" textLink="See all movies" />
-            <ContentItems items={itemsDummy} title="Trending TV Shows" textLink="See all TV Shows" />
-        </>
+        <Container>
+          <ContentTitle title="Trending Movies" textLink="See all movies" pathLink="/movies" />
+          <ContentItems items={itemsDummy} />
+          <ContentTitle title="Trending TV Shows" textLink="Trending TV Shows" pathLink="/tvshows" />
+          <ContentItems items={itemsDummy} />
+        </Container>
     )
 }
 

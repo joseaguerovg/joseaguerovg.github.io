@@ -3,8 +3,8 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import useStyles from './LinkWithIconStyles.material';
 
 interface ILinkWithIconsProps {
-    textLink?: string,
-    pathLink?: string
+    textLink: string,
+    pathLink: string
 }
 
 const LinkWithIcon = (props: ILinkWithIconsProps) => {

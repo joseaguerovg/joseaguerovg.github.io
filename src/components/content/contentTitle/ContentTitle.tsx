@@ -4,8 +4,8 @@ import useStyles from './ContentTitleStyles.material';
 
 interface IContentTitleProps {
     title: string,
-    textLink?: string,
-    pathLink?: string
+    textLink: string,
+    pathLink: string
 }
 
 const ContentTitle = (props: IContentTitleProps) => {
