@@ -1,18 +1,17 @@
-import { Grid, Link } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import useStyles from './LinkWithIconStyles.material';
 
 interface ILinkWithIconsProps {
-    textLink: string,
-    pathLink: string
+    textLink: string
 }
 
 const LinkWithIcon = (props: ILinkWithIconsProps) => {
     const classes = useStyles();
-    const { textLink, pathLink } = props
+    const { textLink } = props
     return (
         <Grid container alignItems="center">
-            <Link color="primary" variant="body1">{textLink}</Link>
+            <Typography color="primary" variant="body1">{textLink}</Typography>
             <ArrowForwardIcon className={classes.arrowIcon} color="primary" fontSize="small"/>
         </Grid>
     )

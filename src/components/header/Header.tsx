@@ -1,14 +1,10 @@
 import { Container, Grid } from '@material-ui/core';
-import { useContext } from 'react';
-import LanguageContext from '../../context/LanguageContext';
-import { ILanguageContext } from '../../interfaces/ILanguageContext';
 import useStyles from './HeaderStyles.material';
 import Logo from './Logo';
 import Nav from './nav/Nav';
 import Search from './search/Search';
 
 const Header = () => {
-    const context: ILanguageContext = useContext(LanguageContext);
     const classes = useStyles();
     return (
         <div className={classes.root}>

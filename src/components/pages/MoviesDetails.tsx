@@ -2,11 +2,16 @@ import { Container, Theme, makeStyles, createStyles, Grid, Typography, Box, Butt
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import classNames from 'classnames';
-import defaultBg from '../../assets/images/default-bg.jpeg'
-import defaultImage from '../../assets/images/default-image.jpeg'
-import defaultActor from '../../assets/images/default-actor.jpeg'
-import { Link } from 'react-router-dom';
-import Header from '../header/Header';
+import { Link, useParams } from 'react-router-dom';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { IMovieDetailsResponse } from '../../interfaces/IMovieDetailsResponse';
+import { theMovieDbApi } from '../../api/theMovieDb';
+import { API_KEY } from '../../api/config';
+import { ILanguageContext } from '../../interfaces/ILanguageContext';
+import LanguageContext from '../../context/LanguageContext';
+import { getActorImage, getBackgroundDetailUri, getPosterUri } from '../../utils/getFinalUriImages';
+import { SettingsPowerRounded } from '@material-ui/icons';
+import ModalVideo from '../modalVideo/ModalVideo';
 
 interface IStyleProps {
     image: string
@@ -47,26 +52,96 @@ const useStyles = makeStyles<Theme, IStyleProps>((theme: Theme) =>
     })
 );
 
+interface IActor {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    order: number
+}
+
+interface IActorResponse {
+    id: number,
+    cast: IActor
+}
+
+interface IVideo{
+    iso_639_1: string,
+    iso_3166_1: string,
+    name: string,
+    key: string,
+    site: string,
+    size: number,
+    type: string,
+    official: true,
+    published_at: string,
+    id: string
+}
+
+interface IVideosResponse {
+    id: number,
+    results: IVideo[]
+}
 
 const MoviesDetails = () => {
-    const prop = {
-        image: defaultBg
+    const context: ILanguageContext = useContext(LanguageContext);
+    const { id } = useParams();
+
+    const [movieDetails, setMovieDetails] = useState<IMovieDetailsResponse>({} as IMovieDetailsResponse)
+    const [imageBackground, setImageBackground] = useState<IStyleProps>({ image: '' })
+    const [actors, setActors] = useState<IActor[]>()
+    const [open, setOpen] = useState<boolean>(false)
+    const [video, setVideo] = useState<IVideo>({} as IVideo)
+
+    const getMovieDetails = useCallback(async () => {
+        const request = await theMovieDbApi.get<IMovieDetailsResponse>(`movie/${id}?api_key=${API_KEY}&language=${context.language}`)
+        setMovieDetails(request.data)
+        setImageBackground({ image: getBackgroundDetailUri(request.data.backdrop_path) })
+    }, [context, id])
+
+    const getActors = useCallback(async () => {
+        const request = await theMovieDbApi.get(`movie/${id}/credits?api_key=${API_KEY}`)
+        const actorsResponse = request.data.cast.filter((actor: IActor) => actor.known_for_department === 'Acting')
+        setActors(actorsResponse)
+    }, [id])
+
+    const getVideo = useCallback(async () => {
+        const request = await theMovieDbApi.get<IVideosResponse>(`movie/${id}/videos?api_key=${API_KEY}&language=${context.language}`)
+        setVideo(request.data.results[0])
+    }, [context, id])
+
+    const handleOpenModal = () => {
+        getVideo()
+        setOpen(true)
     }
 
-    const classes = useStyles(prop);
+    useEffect(() => {
+        getMovieDetails()
+        getActors()
+    }, [getMovieDetails, getActors])
+
+    const classes = useStyles(imageBackground);
     return (
         <>
-            <Header />
             <div className={classes.root}>
                 <div className={classes.wrapper}>
                     <Container className={classNames(classes.contentDetails, classes.textWhite)}>
                         <Grid container spacing={2} alignItems="center">
                             <Grid item xs={3}>
-                                <Grid container alignItems="center">
-                                    <ArrowBackIcon fontSize="small" />
-                                    <Typography color="textSecondary" variant="body1">Back</Typography>
-                                </Grid>
-                                <img src={defaultImage} className={classes.imageMovie} alt="title" />
+                                <Link to="/">
+                                    <Grid container alignItems="center">
+                                        <ArrowBackIcon fontSize="small" className={classes.textWhite} />
+                                        <Typography color="textSecondary" variant="body1">Back</Typography>
+                                    </Grid>
+                                </Link>
+                                <img src={getPosterUri(movieDetails.poster_path)} className={classes.imageMovie} alt={movieDetails.title} />
                             </Grid>
                             <Grid item xs={9}>
                                 <Grid container spacing={2} alignItems="center">
@@ -78,19 +153,23 @@ const MoviesDetails = () => {
                                         </Box>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="h5">Shang-Chi and the Legend of the Ten Rings</Typography>
-                                        <Typography variant="body1" className={classes.genres}>Action, Adventure, Drama</Typography>
+                                        <Typography variant="h5">{movieDetails.title}</Typography>
+                                        <Typography variant="body1" className={classes.genres}>
+                                            {
+                                                movieDetails.genres?.map(genre => (`${genre.name}, `))
+                                            }
+                                        </Typography>
                                     </Grid>
                                 </Grid>
 
                                 <Box marginTop={2}>
-                                    <Button variant="outlined" color="primary" startIcon={<PlayArrowIcon />}>Play Trailer</Button>
+                                    <Button variant="outlined" color="primary" startIcon={<PlayArrowIcon />} onClick={handleOpenModal}>Play Trailer</Button>
                                 </Box>
 
                                 <Box marginTop={2}>
                                     <Typography variant="h6">Overview</Typography>
                                     <Typography variant="body1" className={classes.textRegular}>
-                                        Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization.
+                                        {movieDetails.overview}
                                     </Typography>
                                 </Box>
                                 
@@ -98,22 +177,22 @@ const MoviesDetails = () => {
                                     <Grid container justifyContent="space-between" spacing={2}>
                                         <Grid item>
                                             <Typography variant="body1">Status</Typography>
-                                            <Typography variant="body2" className={classes.textRegular}>Released</Typography>
+                                            <Typography variant="body2" className={classes.textRegular}>{movieDetails.status}</Typography>
                                         </Grid>
 
                                         <Grid item>
                                             <Typography variant="body1">Original Language</Typography>
-                                            <Typography variant="body2" className={classes.textRegular}>EN</Typography>
+                                            <Typography variant="body2" className={classes.textRegular}>{movieDetails.original_language?.toUpperCase()}</Typography>
                                         </Grid>
 
                                         <Grid item>
                                             <Typography variant="body1">Budget</Typography>
-                                            <Typography variant="body2" className={classes.textRegular}>$150,000,000.00</Typography>
+                                            <Typography variant="body2" className={classes.textRegular}>${new Intl.NumberFormat("en-US").format(movieDetails.budget)}</Typography>
                                         </Grid>
 
                                         <Grid item>
                                             <Typography variant="body1">Revenue</Typography>
-                                            <Typography variant="body2" className={classes.textRegular}>$150,000,000.00</Typography>
+                                            <Typography variant="body2" className={classes.textRegular}>${new Intl.NumberFormat("en-US").format(movieDetails.revenue)}</Typography>
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -129,51 +208,20 @@ const MoviesDetails = () => {
                         <Typography variant="h5" color="textPrimary">List of Actors</Typography>
                     </Box>
                     <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                            <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                                <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                                <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                                <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                                <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Link to="/">
-                                <img src={defaultActor} alt="actor name" style={{width: "100%"}}/>
-                                <Typography variant="body1">Simu Liu</Typography>
-                                <Typography variant="body1" className={classes.textRegular}>Shaun / Shang-Chi</Typography>
-                            </Link>
-                        </Grid>
+                        {
+                            actors?.map(actor => (
+                                <Grid key={actor.id} item xs={2}>
+                                    <img src={getActorImage(actor.profile_path)} alt={actor.name} style={{width: "100%"}}/>
+                                    <Typography variant="body1">{actor.name}</Typography>
+                                    <Typography variant="body1" className={classes.textRegular}>{actor.character}</Typography>
+                                </Grid>
+                            ))
+                        }
                     </Grid>
                 </Box>
             </Container>
+
+            <ModalVideo video={video} open={open} setOpen={setOpen} />
         </>
     )
 }

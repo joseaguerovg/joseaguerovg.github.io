@@ -1,10 +1,8 @@
-import { Button, makeStyles, Menu, MenuItem, createStyles, Theme, Typography } from '@material-ui/core'
-import { MouseEvent, useState, useContext, useEffect } from 'react'
+import { Button, makeStyles, Menu, MenuItem, createStyles, Theme } from '@material-ui/core'
+import { MouseEvent, useState, useContext } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import { ILanguageContext } from '../../../interfaces/ILanguageContext';
 import languageFormat from './utils/languageFormat';
-import { HeaderLanguage } from "../../../utils/language/header";
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({

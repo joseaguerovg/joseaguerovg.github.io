@@ -1,6 +1,6 @@
-import { IContentItems } from "./IContentItems";
 import { GridSize } from '@material-ui/core'
+import { IMovie } from '../../../../interfaces/IMovie';
 export interface IContentItemsProps {
-    items: IContentItems[],
+    items: IMovie[],
     itemCol: GridSize
 }

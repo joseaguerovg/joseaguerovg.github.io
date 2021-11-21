@@ -1,4 +1,4 @@
-import { InputBase, IconButton, Paper, Box } from '@material-ui/core'
+import { InputBase, IconButton, Box } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from "./SearchStyles.material";
 

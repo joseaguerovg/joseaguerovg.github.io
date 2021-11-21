@@ -8,6 +8,7 @@ import {
 import Movies from './components/pages/Movies';
 import LanguageContext from './context/LanguageContext';
 import MoviesDetails from './components/pages/MoviesDetails';
+import Header from './components/header/Header';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <LanguageContext.Provider value={{language, setLanguage}}>
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Movies />} />
           <Route path="/movies/:id" element={<MoviesDetails />} />
