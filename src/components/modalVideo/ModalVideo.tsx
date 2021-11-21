@@ -4,6 +4,7 @@ import { API_KEY } from "../../api/config";
 import { theMovieDbApi } from "../../api/theMovieDb";
 import LanguageContext from "../../context/LanguageContext";
 import { ILanguageContext } from "../../interfaces/ILanguageContext";
+import { IVideo } from "../../interfaces/IVideo";
 
 function getModalStyle() {  
     return {
@@ -26,20 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface IVideo{
-    iso_639_1: string,
-    iso_3166_1: string,
-    name: string,
-    key: string,
-    site: string,
-    size: number,
-    type: string,
-    official: true,
-    published_at: string,
-    id: string
+interface IModalVideoProps {
+    open: boolean, 
+    setOpen: Dispatch<boolean>, 
+    video: IVideo
 }
 
-const ModalVideo = (props: { open: boolean, setOpen: Dispatch<boolean>, video: IVideo}) => {
+const ModalVideo = (props: IModalVideoProps) => {
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
     

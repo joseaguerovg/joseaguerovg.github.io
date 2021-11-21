@@ -9,6 +9,7 @@ import Movies from './components/pages/Movies';
 import LanguageContext from './context/LanguageContext';
 import MoviesDetails from './components/pages/MoviesDetails';
 import Header from './components/header/Header';
+import SearchPage from './components/pages/SearchPage';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Movies />} />
           <Route path="/movies/:id" element={<MoviesDetails />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Router>
     </LanguageContext.Provider>
