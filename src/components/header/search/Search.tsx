@@ -1,4 +1,4 @@
-import { InputBase, IconButton, Box, Snackbar } from '@material-ui/core'
+import { InputBase, IconButton, Snackbar } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import { Alert } from '@material-ui/lab';
 import React, { useState } from 'react';

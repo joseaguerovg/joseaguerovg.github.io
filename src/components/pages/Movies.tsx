@@ -60,7 +60,7 @@ const Movies = () => {
                         {
                             genresList.map(({id, name}) => (
                                 <Grid item key={id}>
-                                    <GenresButton id={id} activeGenres={activeGenres} setActiveGenres={setActiveGenres} active={isGenreActive(id)} text={name}/>
+                                    <GenresButton id={id} setCurrentPage={setCurrentPage} activeGenres={activeGenres} setActiveGenres={setActiveGenres} active={isGenreActive(id)} text={name}/>
                                 </Grid>
                             ))
                         }

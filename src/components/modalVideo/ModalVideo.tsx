@@ -1,9 +1,5 @@
 import { makeStyles, Theme, createStyles, Modal } from "@material-ui/core";
-import { Dispatch, useCallback, useContext, useState } from "react";
-import { API_KEY } from "../../api/config";
-import { theMovieDbApi } from "../../api/theMovieDb";
-import LanguageContext from "../../context/LanguageContext";
-import { ILanguageContext } from "../../interfaces/ILanguageContext";
+import { Dispatch, useState } from "react";
 import { IVideo } from "../../interfaces/IVideo";
 
 function getModalStyle() {  

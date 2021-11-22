@@ -1,4 +1,4 @@
-import { Box, Container } from '@material-ui/core'
+import { Box, CircularProgress, Container, Grid } from '@material-ui/core'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { IMovie } from "../../interfaces/IMovie";
@@ -13,10 +13,11 @@ import ContentItems from '../content/contentItems/ContentItems';
 
 const SearchPage = () => {
     const context: ILanguageContext = useContext(LanguageContext);
-    let [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [moviesList, setMoviesList] = useState<IMovie[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true)
 
     const query = searchParams.get("query")
 
@@ -24,6 +25,7 @@ const SearchPage = () => {
         const request = await theMovieDbApi.get<IMoviesResponse>(`search/movie?api_key=${API_KEY}&query=${query}&language=${context.language}&page=${currentPage}`)
         setMoviesList(request.data.results)
         setTotalPages(request.data.total_pages)
+        setLoading(false)
     }, [context, query, currentPage])
 
     const handlePaginationChange = (event: React.ChangeEvent<unknown>, page: number) => {
@@ -33,6 +35,18 @@ const SearchPage = () => {
     useEffect(() => {     
         getResultSearch()
     }, [getResultSearch])
+
+    if(loading) {
+        return (
+            <Container>
+                <Box marginTop={5}>
+                    <Grid container justifyContent="center">
+                        <CircularProgress />
+                    </Grid>
+                </Box>
+            </Container>
+        )
+    }
 
     if(moviesList.length === 0){
         return (

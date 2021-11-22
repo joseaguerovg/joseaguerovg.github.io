@@ -1,11 +1,11 @@
 import { Button } from '@material-ui/core';
-import { Dispatch } from 'react';
+import { IGenresButtonProps } from '../../interfaces/props/IGenresButtonProps';
 import useStyles from './GenresButtonStyles.material';
 
-const GenresButton = (props: { active: boolean, text: string, id: number, activeGenres: number[], setActiveGenres: Dispatch<number[]>}) => {
+const GenresButton = (props: IGenresButtonProps) => {
     const classes = useStyles();
 
-    const { id, active, text, activeGenres, setActiveGenres } = props
+    const { id, active, text, activeGenres, setActiveGenres, setCurrentPage } = props
 
     const handleClick = () => {
         let newArray: number[] = []
@@ -16,6 +16,7 @@ const GenresButton = (props: { active: boolean, text: string, id: number, active
         }
 
         setActiveGenres(newArray)
+        setCurrentPage(1)
     }
 
     return (
