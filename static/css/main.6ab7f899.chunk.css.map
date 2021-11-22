@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,KACI,QAAS,CACT,SACJ,CAEA,EACI,qBACJ,CAEA,EACI,oBACJ,CAEA,YACI,sBACJ","file":"main.6ab7f899.chunk.css","sourcesContent":["body{\n    margin: 0;\n    padding: 0;\n}\n\n*{\n    box-sizing: border-box;\n}\n\na{\n    text-decoration: none;\n}\n\n.openGenres{\n    display: flex!important;\n}"]}
