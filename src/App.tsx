@@ -10,13 +10,15 @@ import LanguageContext from './context/LanguageContext';
 import MoviesDetails from './components/pages/MoviesDetails';
 import Header from './components/header/Header';
 import SearchPage from './components/pages/SearchPage';
+import { en } from "./utils/language/en"
 
 function App() {
 
-  const [language, setLanguage] = useState('en-US')
+  const [language, setLanguage] = useState<string>('en-US')
+  const [text, setText] = useState(en)
 
   return (
-    <LanguageContext.Provider value={{language, setLanguage}}>
+    <LanguageContext.Provider value={{language, setLanguage, text, setText}}>
       <Router>
         <Header />
         <Routes>

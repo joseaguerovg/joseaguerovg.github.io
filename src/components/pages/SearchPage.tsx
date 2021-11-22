@@ -51,14 +51,14 @@ const SearchPage = () => {
     if(moviesList.length === 0){
         return (
             <Container>
-                <ContentTitle title="Movie not found"/>
+                <ContentTitle title={context.text.movieNotFound}/>
             </Container>
         )
     }
 
     return (
         <Container>
-            <ContentTitle title={`Search result: ${query}`}/>
+            <ContentTitle title={`${context.text.searchTitle} ${query}`}/>
             <ContentItems items={moviesList} itemCol={2}/>
             <Box marginTop={5} marginBottom={5} display="flex" justifyContent="center" width="100%">
                 <Pagination 

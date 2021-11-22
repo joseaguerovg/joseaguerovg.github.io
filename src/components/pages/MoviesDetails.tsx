@@ -31,7 +31,7 @@ const MoviesDetails = () => {
             <Container>
                 <Box marginTop={3} marginBottom={5}>
                     <Box marginBottom={2}>
-                        <Typography variant="h5" color="textPrimary">List of Actors</Typography>
+                        <Typography variant="h5" color="textPrimary">{context.text.titleActors}</Typography>
                     </Box>
                     <Grid container spacing={2}>
                         {

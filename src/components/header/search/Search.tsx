@@ -1,11 +1,14 @@
 import { InputBase, IconButton, Snackbar } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import { Alert } from '@material-ui/lab';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import LanguageContext from '../../../context/LanguageContext';
+import { ILanguageContext } from '../../../interfaces/ILanguageContext';
 import useStyles from "./SearchStyles.material";
 
 const Search = () => {
+    const context: ILanguageContext = useContext(LanguageContext);
     const classes = useStyles();
     const [query, setQuery] = useState<string>("")
     const [openError, setOpenError] = useState<boolean>(false)
@@ -40,7 +43,7 @@ const Search = () => {
         <>
             <form onSubmit={handleSubmit} className={classes.root}>
                 <InputBase
-                    placeholder="Search movies..."
+                    placeholder={context.text.placeholderSearch}
                     inputProps={{ 'aria-label': 'search' }}
                     className={classes.input}
                     onChange={handleChange}

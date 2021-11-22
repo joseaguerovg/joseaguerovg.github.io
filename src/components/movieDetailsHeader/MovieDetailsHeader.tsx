@@ -40,7 +40,7 @@ const MovieDetailsHeader = (props: { movieDetails: IMovieDetailsResponse, imageB
                                 <Link to="/">
                                     <Grid container alignItems="center">
                                         <ArrowBackIcon fontSize="small" className={classes.textWhite} />
-                                        <Typography color="textSecondary" variant="body1">Back</Typography>
+                                        <Typography color="textSecondary" variant="body1">{context.text.back}</Typography>
                                     </Grid>
                                 </Link>
                                 <img src={getPosterUri(movieDetails.poster_path)} className={classes.imageMovie} alt={movieDetails.title} />
@@ -61,11 +61,11 @@ const MovieDetailsHeader = (props: { movieDetails: IMovieDetailsResponse, imageB
                                 </Grid>
 
                                 <Box marginTop={2}>
-                                    <Button variant="outlined" color="primary" startIcon={<PlayArrowIcon />} onClick={handleOpenModal}>Play Trailer</Button>
+                                    <Button variant="outlined" color="primary" startIcon={<PlayArrowIcon />} onClick={handleOpenModal}>{context.text.playTrailler}</Button>
                                 </Box>
 
                                 <Box marginTop={2}>
-                                    <Typography variant="h6">Overview</Typography>
+                                    <Typography variant="h6">{context.text.overview}</Typography>
                                     <Typography variant="body1" className={classes.textRegular}>
                                         {movieDetails.overview}
                                     </Typography>
@@ -74,22 +74,22 @@ const MovieDetailsHeader = (props: { movieDetails: IMovieDetailsResponse, imageB
                                 <Box marginTop={2}>
                                     <Grid container justifyContent="space-between" spacing={2}>
                                         <Grid item>
-                                            <Typography variant="body1">Status</Typography>
+                                            <Typography variant="body1">{context.text.status}</Typography>
                                             <Typography variant="body2" className={classes.textRegular}>{movieDetails.status}</Typography>
                                         </Grid>
 
                                         <Grid item>
-                                            <Typography variant="body1">Original Language</Typography>
+                                            <Typography variant="body1">{context.text.originalLanguage}</Typography>
                                             <Typography variant="body2" className={classes.textRegular}>{movieDetails.original_language?.toUpperCase()}</Typography>
                                         </Grid>
 
                                         <Grid item>
-                                            <Typography variant="body1">Budget</Typography>
+                                            <Typography variant="body1">{context.text.budget}</Typography>
                                             <Typography variant="body2" className={classes.textRegular}>${new Intl.NumberFormat("en-US").format(movieDetails.budget)}</Typography>
                                         </Grid>
 
                                         <Grid item>
-                                            <Typography variant="body1">Revenue</Typography>
+                                            <Typography variant="body1">{context.text.revenue}</Typography>
                                             <Typography variant="body2" className={classes.textRegular}>${new Intl.NumberFormat("en-US").format(movieDetails.revenue)}</Typography>
                                         </Grid>
                                     </Grid>

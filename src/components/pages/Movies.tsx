@@ -54,7 +54,7 @@ const Movies = () => {
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={3}>
-                    <ContentTitle title="Genres"/>
+                    <ContentTitle title={context.text.genres}/>
                     
                     <Grid container spacing={2}>
                         {
@@ -67,7 +67,7 @@ const Movies = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={9} container>
-                    <ContentTitle title="Movies"/>
+                    <ContentTitle title={context.text.movies}/>
                     <ContentItems items={moviesList} itemCol={3}/>
                     <Box marginTop={5} marginBottom={5} display="flex" justifyContent="center" width="100%">
                         <Pagination 

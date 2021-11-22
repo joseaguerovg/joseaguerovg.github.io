@@ -4,6 +4,9 @@ import LanguageContext from '../../../context/LanguageContext';
 import { ILanguageContext } from '../../../interfaces/ILanguageContext';
 import languageFormat from './utils/languageFormat';
 
+import { en } from "../../../utils/language/en"
+import { es } from "../../../utils/language/es"
+
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         buttonWidth: {
@@ -31,6 +34,11 @@ const Nav = () => {
 
     const handleChangeLanguage = (language: string) => {
         context.setLanguage(language);
+        if(language === 'en-US'){
+            context.setText(en);
+        }else{
+            context.setText(es);
+        }
         handleClose()
     };
 
