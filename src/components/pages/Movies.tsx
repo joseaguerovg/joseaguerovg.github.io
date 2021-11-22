@@ -25,7 +25,6 @@ const Movies = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [activeGenres, setActiveGenres] = useState<number[]>([])
-    const [openGenresXs, setOpenGenresXs] = useState<boolean>(false)
 
     const genresRef = useRef<HTMLHeadingElement>(null)
 
