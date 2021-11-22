@@ -1,22 +1,25 @@
-import { makeStyles, Theme, createStyles, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { Dispatch } from 'react';
+import useStyles from './GenresButtonStyles.material';
 
-const useStyles = makeStyles((theme: Theme) => 
-    createStyles({
-        default: {
-            border: "1px solid rgba(219, 219, 219, .5)",
-            color: theme.palette.text.primary,
-            "&:hover": {
-                backgroundColor: "#fff",
-                border: "1px solid rgba(219, 219, 219, .9)"
-            }
-        }
-    })
-);
-
-const GenresButton = (props: { active: boolean, text: string }) => {
+const GenresButton = (props: { active: boolean, text: string, id: number, activeGenres: number[], setActiveGenres: Dispatch<number[]>}) => {
     const classes = useStyles();
+
+    const { id, active, text, activeGenres, setActiveGenres } = props
+
+    const handleClick = () => {
+        let newArray: number[] = []
+        if(!activeGenres.includes(id)){
+            newArray = [...activeGenres, id]            
+        }else{
+            newArray = activeGenres.filter(genre => genre !== id)
+        }
+
+        setActiveGenres(newArray)
+    }
+
     return (
-        <Button variant="outlined" color="primary" className={!props.active ? classes.default : ''}>{props.text}</Button>
+        <Button onClick={handleClick} variant="outlined" color="primary" className={!active ? classes.default : ''}>{text}</Button>
     )
 }
 
