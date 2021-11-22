@@ -8,7 +8,7 @@ const ActorItem = (props: { actor: IActor }) => {
     const classes = useStyles()
     
     return (
-        <Grid item xs={2}>
+        <Grid item xs={6} sm={3} md={2}>
             <img src={getActorImage(actor.profile_path)} alt={actor.name} style={{width: "100%"}}/>
             <Typography variant="body1">{actor.name}</Typography>
             <Typography variant="body1" className={classes.textRegular}>{actor.character}</Typography>

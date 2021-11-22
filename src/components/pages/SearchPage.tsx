@@ -59,7 +59,7 @@ const SearchPage = () => {
     return (
         <Container>
             <ContentTitle title={`${context.text.searchTitle} ${query}`}/>
-            <ContentItems items={moviesList} itemCol={2}/>
+            <ContentItems items={moviesList} xs={6} sm={3} md={2}/>
             <Box marginTop={5} marginBottom={5} display="flex" justifyContent="center" width="100%">
                 <Pagination 
                     key={`pagination-${currentPage}`}

@@ -3,5 +3,7 @@ import { IMovie } from "../IMovie";
 
 export interface IMovieItemProps {
     item: IMovie, 
-    itemCol: GridSize
+    xs: GridSize,
+    sm: GridSize,
+    md: GridSize,
 }

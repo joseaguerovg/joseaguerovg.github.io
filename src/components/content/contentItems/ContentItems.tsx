@@ -4,12 +4,12 @@ import { IContentItemsProps } from './interfaces/IContentItemsProps';
 
 const ContentItems = (props: IContentItemsProps) => {
 
-    const { items, itemCol } = props
+    const { items, xs, sm, md } = props
 
     return (
         <Grid container spacing={2}>
             {
-                items.map(item => <MovieItem key={item.id} item={item} itemCol={itemCol} />)
+                items.map(item => <MovieItem key={item.id} item={item} xs={xs} sm={sm} md={md} />)
             }
         </Grid>
     )

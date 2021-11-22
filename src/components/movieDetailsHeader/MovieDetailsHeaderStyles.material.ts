@@ -13,6 +13,11 @@ const useStyles = makeStyles<Theme, IStyleMovieListProps>((theme: Theme) =>
             paddingTop: theme.spacing(5),
             paddingBottom: theme.spacing(5)
         },
+        contentHeader:{
+            [theme.breakpoints.up('md')]: {
+                alignItems: "center"
+            }
+        },
         contentDetails:{
             zIndex: 2
         },
